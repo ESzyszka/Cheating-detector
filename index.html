@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+  <head>
+    <title>Multiple object detection using pre trained model in TensorFlow.js</title>
+    <meta charset="utf-8">
+    <!-- STYLE IMPORT  -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.1/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.1/face_mesh.js" crossorigin="anonymous"></script>
+  
+  </head>  
+
+
+
+  <body>
+    <h1> 不正行為検出 | Cheating detector</h1>
+    <p> Tensorflow.jsのCOCO-SSDに基づく人間検出 |  Person detection based on COCO-SSD Tesorflow.js</p>
+    <ul> 1. ✅ 画面の上でいる人が計算する | Calculate the number of people on the screen   </ul>
+    <ul> 2. ✅ 携帯検出システム| Create an alert when a phone is detected   </ul>
+    <ul> 3. ✅ 欠席率 | Calculate the percentage of absence </ul>
+    <ul> 4. ❌ イリス追跡 | Iris tracking  </ul>
+
+
+
+    <section id="demos" class="invisible">
+
+      <!-- ** Webcam activation and canvas where the predictons will be displayed ** -->
+      <div id="liveView" class="camView">
+        <button id="webcamButton">Enable Webcam</button>
+        <div style="position: relative;">
+          
+          <video id="webcam" autoplay muted playsinline width="640" height="480"></video>
+          <canvas class="output_canvas" id="output_canvas" style="position: absolute; left: 0; top: 0;"></canvas>
+
+        </div>
+
+
+
+        <!-- ****************************  FaceMesh **************************** -->
+        <div class="container" style="margin-top: 20px;">
+
+          <div class="columns">
+            
+                <!-- WEBCAM INPUT -->
+                <div class="column"  style="display: none;">
+                  <article class="panel is-info">
+                  
+                    <div class="panel-block">
+                      <video class="input_video2"></video>
+                    </div>
+                  </article>
+                </div>
+
+                <!-- MEDIAPIPE OUTPUT -->
+                <div class="column">
+                  <article class="panel is-info">
+                    <p class="panel-heading">
+                      Mediapipe Face Mesh
+                    </p>
+                    <div class="panel-block">
+                      <canvas class="output2" width="480px" height="480px"></canvas>
+                    </div>
+                  </article>
+                </div>
+              </div>
+              
+              <div class="loading">
+                <div class="spinner"></div>
+              </div>
+            <div  class="control2">
+            </div>
+
+            <script type="text/javascript" src="./js/faceMesh.js"></script>
+              
+        </div>
+      <!-- ******************************************************************* -->
+
+
+
+
+
+      <!-- ** This is what ensures that the displayed predictions are continuous ** -->
+
+      <div class="blend-shapes">
+        <ul class="blend-shapes-list" id="video-blend-shapes"></ul>
+      </div>
+      <!-- ******************************************************************* -->
+
+        <div class="text-container">
+            <div id="detectedClass" class="text"> </div>　<!--This is where the detected class will be displayed-->
+            <div id="peopleCount"> </div>
+            
+            <button id="phoneAlertButton" style="display: none">PHONE ALERT</button>
+
+        </div>
+      </div>
+    </section>
+
+
+   
+
+
+  <!-- NAVBAR
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+
+  
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+     
+  
+        <a class="navbar-item" href="faceMesh.html">
+          Face Mesh
+        </a>
+
+        </div>
+      </div>
+  
+    </div>
+  </nav>
+ END OF NAVBAR -->
+
+
+
+
+  
+
+
+
+
+
+
+
+    <div id="your-container-id"></div>
+    <button id="endInterview">Finish the interview</button>
+    <div id="timerDisplay"></div>
+    
+
+
+    <!-- Import TensorFlow.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
+    <!-- Load the coco-ssd model to use to recognize objects -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+    
+      <script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js"
+        crossorigin="anonymous"></script>
+   
+ 
+  
+        
+    <!-- Import the page's JavaScript -->
+    <script  src="script.js" defer></script>
+
+  </body>
+</html>
